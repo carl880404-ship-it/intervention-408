@@ -508,7 +508,11 @@ with tab_analysis:
         import re
     
         # ティッカー形式から日本/米国を自動判別
-        if ticker_input_str.endswith(".T"):
+        if ticker_input_str.startswith('^') or ticker_input_str.endswith('=X'):
+            # インデックスや為替の場合は.Tを付与せずそのまま利用
+            ticker_symbol = ticker_input_str
+            is_japan_market = ("N225" in ticker_input_str or "TOPX" in ticker_input_str or (market_choice == "日本"))
+        elif ticker_input_str.endswith(".T"):
             ticker_symbol = ticker_input_str
             is_japan_market = True
         elif re.match(r'^\d[A-Z0-9]{3}$', ticker_input_str):
