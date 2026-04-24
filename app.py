@@ -104,10 +104,8 @@ Streamlitとyfinanceを使って株価データを表示し、専用AI「Cheyann
 
 # Gemini APIキーの読み込み
 api_key = os.environ.get("GEMINI_API_KEY")
-# ユーザー提供のキーをデフォルト候補として提示
-provided_key = "AIzaSyDeFSZKgYuSvgSvOmGFRSNKpzSnW75yIsk"
 if not api_key:
-    api_key = st.sidebar.text_input("🗝️ Gemini API Key", value=provided_key, type="password", help="環境変数 GEMINI_API_KEY が未設定の場合はこちらに入力してください。")
+    api_key = st.sidebar.text_input("🗝️ Gemini API Key", type="password", help="環境変数 GEMINI_API_KEY が未設定の場合はこちらに入力してください。")
 
 st.sidebar.markdown("---")
 # 1.5系はサポート外の可能性があるため、2.5/2.0系に限定
