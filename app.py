@@ -745,7 +745,8 @@ with tab_analysis:
                 if not api_key:
                     st.warning("深層診断レポートを利用するにはAPIキーを設定してください。")
                 else:
-                    deep_prompt = f"""
+                    if st.button("🤖 深層診断レポートを生成", key=f"btn_deep_diag_{ticker_symbol}_{model_choice}"):
+                        deep_prompt = f"""
 あなたは伝説的な投資プランナーであり、心理分析を得意とするクオンツ「Cheyanne」です。
 以下の精緻なデータに基づき、この銘柄の情報の裏側を読み解く【深層戦略レポート】を作成してください。
 
@@ -762,12 +763,13 @@ with tab_analysis:
 
 Markdown形式で、客観的でありながら鋭い洞察を含めて出力してください。
 """
-                    try:
-                        with st.spinner("Cheyanneが市場の深層を解析中..."):
-                            res_deep = safe_generate_content(client, model_choice, deep_prompt)
-                            st.markdown(res_deep.text)
-                    except Exception as e:
-                        st.error(f"深層分析中にエラーが発生しました: {e}")
+                        try:
+                            with st.spinner("Cheyanneが市場の深層を解析中..."):
+                                res_deep = safe_generate_content(client, model_choice, deep_prompt)
+                                st.markdown(res_deep.text)
+                        except Exception as e:
+                            st.error(f"深層分析中にエラーが発生しました: {e}")
+
 
                 st.divider()
 
